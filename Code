@@ -1,0 +1,390 @@
+#include <stdio.h>
+#include <iostream>
+#include <stdlib.h>
+#include <string.h>
+
+using namespace std;
+void menu();
+void welcome();
+void AddStudent();
+void DisplayAll(); //Declaration of functions.
+void BubbleSort();
+void ExportToFile();
+void ImportFromFile();
+
+
+
+
+
+
+
+
+
+void welcome(){
+ printf("This program is intended to calculate grades for students in f6.\n");//Purpose of program.
+ printf("                    _,...,_      \n");
+ printf("             .'@/~~~\@'.    \n");
+ printf("           //~~\___/~~\\   \n");
+ printf("     |@\__/@@@\__/@|  \n"); //Welcome screen art.
+ printf("     |@/  \@@@/  \@|  \n");
+ printf("          \\__/~~~\__//   \n");
+ printf("            '.@\___/@.'    \n");
+ printf("                    -,...,-      \n");
+ return;
+}
+
+struct Student{//Each different field for a student is stored here.
+  char StudentName[50];//Max length for Student name.
+  char Subject1[25];
+  int Total1;
+  float Mark1;
+  char Subject2[25];
+  int Total2;
+  float Mark2;
+  char Subject3[25];
+  int Total3;
+  float Mark3;
+  char Subject4[25];
+  int Total4;
+  float Mark4;
+  float TotalMark;
+  float AvgMark;
+
+};
+
+Student StudentRecords[40]; //maximum of 40 records in the array.
+int COUNTER = 0;
+
+int main(){
+    welcome();
+    menu();
+    return 0;
+}
+
+void menu(void)
+{
+   int UserChoice;
+
+   do{
+    printf("\n**************MAIN MENU*************\n");
+    printf("1. Add Student\n");
+    printf("2. Display All Students\n");
+    printf("3. Sort\n");                 //User Menu.
+    printf("4. Export Data to File\n");
+    printf("5. Import Data from File\n");
+    printf("6. EXIT\n");
+    printf("\n Your Choice:");
+    scanf("%d", &UserChoice);
+
+
+
+
+
+
+switch(UserChoice){
+    case 1://Each different case does a specific function.
+            AddStudent();//Procedure allows you to add a new Student.
+            break;
+    case 2:
+           DisplayAll();//Procedure displays all information entered.
+           break;
+    case 3:
+           BubbleSort();//Procedure sorts all information in the array.
+           break;
+    case 4:
+           ExportToFile();//Procedure exports all the information in the array.
+           break;
+    case 5:
+           ImportFromFile();// Procedure imports information from a file.
+           break;
+    case 6:
+           exit(0);
+           break;
+
+    default:
+        printf("Please enter a valid option\n"); //Ensures user enters valid choice.
+   }//End of switch.
+  }while (1);//End of do.
+}//End of main.
+
+int clean_stdin()
+{
+    while (getchar()!='\n');
+    return 1;
+}
+
+void AddStudent(){ //Function for adding a student.
+
+ const int W = 1; //Constants.
+ const int D = 4;
+  int Total1;
+  int Total2;
+  int Total3;
+  int Total4;
+ int clean_stdin();
+ char ok;
+ char c;
+
+ system("cls");
+ printf("**************ADD STUDENT******************\n");
+
+ ok='F';
+ do{
+    printf("Please enter the students name\n");
+    scanf("%s", &StudentRecords[COUNTER].StudentName); //Accepts the Students intials.
+
+    if (strlen(StudentRecords[COUNTER].StudentName)>50){
+        ok='F';
+        printf("Student name is too long.\n");  //Ensures the Student name does not exceed max length.
+    }
+    else{
+        ok='T';
+    }
+ }while (ok=='F');
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+printf("Please enter the first subject name\n");
+    scanf("%s", &StudentRecords[COUNTER].Subject1); //Accepts the Students first subject.
+
+    if (strlen(StudentRecords[COUNTER].Subject1)>25){
+        ok='F';
+        printf("Student name is too long.\n");  //Ensures the subject name does not exceed max length.
+    }
+    else{
+        ok='T';
+    }
+ while (ok=='F');
+
+ /*------------------------------------------------------------------------------------------------------------------------*/
+
+ printf("Enter the total mark.\n");
+ do{
+    if (((scanf("%d%c", &StudentRecords[COUNTER].Total1, &ok)!= 2 || ok != '\n') &&clean_stdin()) || StudentRecords[COUNTER].Total1 >200){
+        ok='F'; //Accepts the marks made by the student.
+        printf("Please enter valid integer(within the range 1-200).\n");  //Ensures the number of marks entered is an integer and does not exceed the max number of marks possible.
+    }
+    else{
+        ok = 'T';
+    }
+ while (ok=='F');
+
+/*-------------------------------------------------------------------------------------------------------------------------*/
+printf("Please enter the second subject name\n");
+    scanf("%s", &StudentRecords[COUNTER].Subject2); //Accepts the second subject name.
+
+    if (strlen(StudentRecords[COUNTER].Subject2)>25){
+        ok='F';
+        printf("Student name is too long.\n");  //Ensures the Student name does not exceed max length.
+    }
+    else{
+        ok='T';
+    }
+ }while (ok=='F');
+
+ /*-----------------------------------------------------------------------------------------------------------------------*/
+
+ printf("Enter the total mark.\n");
+ do{
+    if (((scanf("%d%c", &StudentRecords[COUNTER].Total2, &ok)!= 2 || ok != '\n') &&clean_stdin()) || StudentRecords[COUNTER].Total2 >200){
+        ok='F'; //Accepts the marks made by the student.
+        printf("Please enter valid integer(within the range 1-200).\n");//Ensures the number of marks entered is an integer and does not exceed the max number of marks possible.
+    }
+    else{
+        ok = 'T';
+    }
+ }while (ok=='F');
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+printf("Please enter the third subject name\n");
+    scanf("%s", &StudentRecords[COUNTER].Subject3); //Accepts the third subject name.
+
+    if (strlen(StudentRecords[COUNTER].Subject3)>25){
+        ok='F';
+        printf("Student name is too long.\n");  //Ensures the subject name does not exceed max length.
+    }
+    else{
+        ok='T';
+    }
+  while (ok=='F');
+
+
+ /*------------------------------------------------------------------------------------------------------------------------*/
+
+ printf("Enter the total mark.\n");
+ do{
+    if (((scanf("%d%c", &StudentRecords[COUNTER].Total3, &ok)!= 2 || ok != '\n') &&clean_stdin()) || StudentRecords[COUNTER].Total3 >200){
+        ok='F'; //Accepts the marks made by the student.
+        printf("Please enter valid integer(within the range 1-200).\n");//Ensures the number of marks entered is an integer and does not exceed the max number of marks possible.
+    }
+    else{
+        ok = 'T';
+    }
+ }while (ok=='F');
+
+/*------------------------------------------------------------------------------------------------------------------------*/
+printf("Please enter the fourth subject name\n");
+    scanf("%s", &StudentRecords[COUNTER].Subject4); //Accepts the Students marks.
+
+    if (strlen(StudentRecords[COUNTER].Subject4)>25){
+        ok='F';
+        printf("Student name is too long.\n");  //Ensures the subject name does not exceed max length.
+    }
+    else{
+        ok='T';
+    }
+ while (ok=='F');
+
+ /*----------------------------------------------------------------------------------------------------------------------*/
+
+ printf("Enter the total mark.\n");
+ do{
+    if (((scanf("%d%c", &StudentRecords[COUNTER].Total4, &ok)!= 2 || ok != '\n') &&clean_stdin()) || StudentRecords[COUNTER].Total4 >200){
+        ok='F'; //Accepts the marks made by the student.
+        printf("Please enter valid integer(within the range 1-200).\n");//Ensures the marks entered dont exceed max.
+    }
+    else{
+        ok = 'T';
+    }
+ }while (ok=='F');
+
+
+   StudentRecords[COUNTER].Mark1= ((float)StudentRecords[COUNTER].Total1/200)*100;
+   StudentRecords[COUNTER].Mark2= ((float)StudentRecords[COUNTER].Total2/200)*100;
+   StudentRecords[COUNTER].Mark3= ((float)StudentRecords[COUNTER].Total3/200)*100;
+   StudentRecords[COUNTER].Mark4= ((float)StudentRecords[COUNTER].Total4/200)*100;
+   printf("%d",StudentRecords[COUNTER].Mark1);
+   printf("%d",StudentRecords[COUNTER].Mark2);
+   printf("%d",StudentRecords[COUNTER].Mark3);
+   printf("%d",StudentRecords[COUNTER].Mark4);
+
+   system("pause");
+
+   if((StudentRecords[COUNTER].Mark1+StudentRecords[COUNTER].Mark2+StudentRecords[COUNTER].Mark3+StudentRecords[COUNTER].Mark4)<=400){
+    //Ensures that the max amount of marks gained does not exceed(400).
+   StudentRecords[COUNTER].TotalMark=(StudentRecords[COUNTER].Mark1 + StudentRecords[COUNTER].Mark2 + StudentRecords[COUNTER].Mark3 + StudentRecords[COUNTER].Mark4 * W); //Calculates the total number of marks.
+   StudentRecords[COUNTER].AvgMark=StudentRecords[COUNTER].TotalMark/D;
+    //Calculates the Average.
+
+    system("cls");
+
+    printf("Student Name: %s\n", StudentRecords[COUNTER].StudentName);
+    printf("Subject 1: %s\n", StudentRecords[COUNTER].Subject1);
+    printf("Mark 1: %f\n", StudentRecords[COUNTER].Mark1);
+    printf("Subject 2: %s\n", StudentRecords[COUNTER].Subject2);
+    printf("Mark 2: %f\n", StudentRecords[COUNTER].Mark2);
+    printf("Subject 3: %s\n", StudentRecords[COUNTER].Subject3);
+    printf("Mark 3: %f\n", StudentRecords[COUNTER].Mark3);
+    printf("Subject 4: %s\n", StudentRecords[COUNTER].Subject4);
+    printf("Mark 4: %f\n", StudentRecords[COUNTER].Mark4);  //Prints the results for the user//
+    printf("Total Mark: %f\n", StudentRecords[COUNTER].TotalMark);
+    printf("Average Mark: %f\n", StudentRecords[COUNTER].AvgMark);
+    printf("The information entered was successfully saved to the system.\n");
+
+    COUNTER++;
+ }
+ else{
+     system("cls");
+     printf("Marks exceed max.\n");
+ }
+}//End of AddStudent
+
+void DisplayAll(){ //Function for displaying all the Students entered.
+
+ system("cls");
+ int i;
+
+ printf("**************Display All******************\n");
+
+ for(i = 0; i < COUNTER ; i++){
+  printf("\nStudent Name: %s\n", StudentRecords[i].StudentName);
+  printf("Subject 1: %s\n", StudentRecords[i].Subject1);
+  printf("Mark 1: %f\n", StudentRecords[i].Mark1);
+  printf("Subject 2: %s\n", StudentRecords[i].Subject2);
+  printf("Mark 2: %f\n", StudentRecords[i].Mark2);
+  printf("Subject 3: %s", StudentRecords[i].Subject3);
+  printf("Mark 3: %f\n", StudentRecords[i].Mark3);   //Displays all content entered by the user.
+  printf("Subject 4: %s\n", StudentRecords[i].Subject4);
+  printf("Mark 4: %f\n", StudentRecords[i].Mark4);
+  printf("Total Mark: %f\n", StudentRecords[i].TotalMark);
+  printf("Average Mark: %f\n", StudentRecords[i].AvgMark);
+  }//End of loop.
+}//End of DisplayAll.
+
+void BubbleSort(){ //Function for sorting the Students entered based on Marks.
+
+ system("cls");
+ int step = 2;
+ Student temp;
+
+ printf("**************Sort******************\n");
+
+ for ( int t = 0; t < step; t++){
+    for (int j = 0; j < 200; j++){
+        if (StudentRecords[j].AvgMark < StudentRecords[j + 1].AvgMark){
+            temp = StudentRecords[j];         //Sorts the data in descending order.
+            StudentRecords[j] = StudentRecords[j + 1];
+            StudentRecords[j + 1] = temp;
+        j++;
+        }
+    }
+ }
+ printf("The Students were sorted.");
+}//End of Sort.
+
+void ExportToFile(){//Function for exporting all the Students entered into a text file.
+ system("cls");
+ int i;
+
+ printf("**************Export Data to File******************\n");
+
+ FILE * Results;
+
+ Results = fopen("results.txt", "w+");
+ fprintf(Results, "%s\n", "The Results of the Grades are:");
+
+ for(i = 0; i < COUNTER ; i++){
+  fprintf(Results, "\nStudent Name: %s\n", StudentRecords[i].StudentName);
+  fprintf(Results, "Subject 1: %s\n", StudentRecords[i].Subject1);
+  fprintf(Results, "Mark 1: %f/n", StudentRecords[i].Mark1);
+  fprintf(Results, "Subject 2: %s\n", StudentRecords[i].Subject2);
+  fprintf(Results, "Mark 2: %f/n", StudentRecords[i].Mark2);
+  fprintf(Results, "Subject 3: %s\n", StudentRecords[i].Subject3);
+  fprintf(Results, "Mark 3: %f/n", StudentRecords[i].Mark3); //Exports data to a text file.
+  fprintf(Results, "Subject 4: %s\n", StudentRecords[i].Subject4);
+  fprintf(Results, "Mark 4: %f/n", StudentRecords[i].Mark4);
+  fprintf(Results, "Total Mark: %f\n", StudentRecords[i].TotalMark);
+  fprintf(Results, "Average Mark: %f\n", StudentRecords[i].AvgMark);
+ }
+ fclose(Results);
+ printf("The results were exported.\n");
+}//End of Export.
+
+void ImportFromFile(){//Function for importing data froma  text file.
+    
+ system("cls");
+ int i;
+
+ printf("***************Import Data From File*****************\n");
+
+ FILE * Results;
+
+ Results = fopen("results.txt", "r");
+
+ for(i = 0; i < COUNTER ; i++){
+  fscanf(Results, "%s", &StudentRecords[i].StudentName);
+  fscanf(Results, "%s", &StudentRecords[i].Subject1);
+  fscanf(Results, "%f", &StudentRecords[i].Mark1);
+  fscanf(Results, "%s", &StudentRecords[i].Subject2);
+  fscanf(Results, "%f", &StudentRecords[i].Mark2);
+  fscanf(Results, "%s", &StudentRecords[i].Subject3);
+  fscanf(Results, "%f", &StudentRecords[i].Mark3); //Imports data from file. Still yet to get it to work.
+  fscanf(Results, "%s", &StudentRecords[i].Subject4);
+  fscanf(Results, "%f", &StudentRecords[i].Mark4);
+  fscanf(Results, "%f", &StudentRecords[i].TotalMark);
+  fscanf(Results, "%f", &StudentRecords[i].AvgMark);
+ }
+ fclose(Results);
+
+ printf("The files were imported\n");
+ system("pause");
+}//End of Import
